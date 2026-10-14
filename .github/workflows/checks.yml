@@ -1,0 +1,42 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  arduino-and-native-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - name: Install Arduino CLI
+        uses: arduino/setup-arduino-cli@81d310742121c928ea9c8bbd407b4217b432ae02 # v2.0.0
+        with:
+          version: 1.5.1
+      - name: Install host test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3 ffmpeg
+      - name: Install pinned Arduino dependencies
+        run: bash tools/setup-arduino.sh
+      - name: Compile music player and run native tests
+        run: bash tools/check.sh
+      - name: Compile standalone button diagnostic
+        run: >-
+          arduino-cli compile
+          --fqbn esp32:esp32:esp32s3:USBMode=default,CDCOnBoot=default,PSRAM=disabled,FlashSize=4M
+          --build-path build-buttons
+          arduino/LucidUsbButtonTest

@@ -1,0 +1,30 @@
+name: Bug or DAC compatibility report
+description: Report playback, build, display, or USB connection problems.
+body:
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware and USB power
+      description: Board, DAC/earphone model, UAC version or VID/PID if known, and power/adapter arrangement.
+    validations:
+      required: true
+  - type: input
+    id: software
+    attributes:
+      label: Software versions
+      description: Project commit and ESP32 Arduino core version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result, and actual result
+      description: Include the LCD status. For music, mention file format and sample rate.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Build or UART logs, if available
+      description: Native USB serial is unavailable in host mode. Do not include credentials or copyrighted music.
+      render: text
