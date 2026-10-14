@@ -1,0 +1,39 @@
+# ESP-IDF and Arduino build products
+/build/
+/build-*/
+/managed_components/
+/sdkconfig
+/sdkconfig.old
+/dependencies.lock
+*.bin
+*.elf
+*.map
+*.o
+*.a
+*.d
+*.hex
+*.uf2
+
+# Host tests and local tools
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.tools/
+.arduino-user/
+.DS_Store
+.vscode/
+.idea/
+
+# Local account configuration, captures, and publication handoff
+.codex/
+.agents/
+.aws/
+.env
+.env.*
+!.env.example
+*.log
+*.bundle
+/publication/
+/buttons-playing.txt
+/file.txt
