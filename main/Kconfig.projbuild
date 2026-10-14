@@ -1,0 +1,31 @@
+menu "Lucid USB beep"
+    config LUCID_DISPLAY
+        bool "Enable Lucid LCD and SD initialization"
+        default y
+        help
+            Disable for a USB-only test without Lucid attached.
+    config LUCID_SCK
+        int "SPI SCK GPIO"
+        default 35
+    config LUCID_MOSI
+        int "SPI MOSI GPIO"
+        default 36
+    config LUCID_MISO
+        int "SPI MISO GPIO"
+        default 37
+    config LUCID_SD_CS
+        int "Lucid CS1 / SD CS GPIO"
+        default 44
+    config LUCID_LCD_CS
+        int "Lucid CS2 / LCD CS GPIO"
+        default 43
+    config LUCID_LCD_DC
+        int "LCD DC GPIO"
+        default 18
+    config LUCID_LCD_RST
+        int "LCD reset GPIO"
+        default 17
+    config LUCID_LCD_BL
+        int "LCD backlight GPIO (active high)"
+        default 16
+endmenu
